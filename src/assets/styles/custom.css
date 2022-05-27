@@ -1,0 +1,188 @@
+.overflow-x-scroll {
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
+    z-index: 2 !important;
+}
+.overflow-x-scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    height: 7px;
+}
+
+/* .overflow-x-scroll:hover::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+} */
+.overflow-x-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.7);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+/* .overflow-x-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.7);
+    border-radius: 4px;
+} */
+
+.news {
+    /* flex-basis: 20% !important; */
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    margin: 5px !important;
+    text-align: justify !important;
+}
+.top-nav {
+    padding: 0 16px !important;
+}
+.ant-page-header-heading-title {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+    text-overflow: unset !important;
+    overflow: auto !important;
+}
+.ant-page-header-heading-title::-webkit-scrollbar {
+    display: none !important;
+}
+
+.layout-content {
+    overflow-x: hidden;
+}
+
+.container {
+    padding-right: 15px !important;
+    padding-left: 15px;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    margin-right: auto;
+    margin-right: auto;
+    width: 100% !important;
+}
+
+.justify-content-space {
+    justify-content: space-around !important;
+}
+.justify-content-space-between {
+    justify-content: space-between !important;
+}
+.justify-content-space-evenly {
+    justify-content: space-evenly !important;
+}
+.home-heading {
+    justify-content: space-around !important;
+    flex-direction: row;
+    display: flex;
+}
+.text-justify {
+    text-align: justify !important;
+}
+.pb-7 {
+    padding-bottom: 7px !important;
+}
+
+.pl-10 {
+    padding-left: 15px !important;
+}
+
+.bg-light {
+    background-color: #f1f1f1 !important;
+}
+
+.tipper .ant-card-head {
+    border: none !important;
+}
+
+.tipper .ant-card-body {
+    box-shadow: 0px 20px 27px #0000000d;
+    border-radius: 12px;
+}
+
+.news .ant-card-actions li {
+    text-align: justify;
+    padding: 0 16px;
+}
+
+.borderless {
+    border: none !important;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+.tipper .ant-card-head .ant-card-head-wrapper .ant-card-head-title {
+    white-space: normal !important;
+}
+.news .ant-card-body .ant-card-meta .ant-card-meta-detail .ant-card-meta-title {
+    white-space: normal !important;
+}
+.news .ant-card-actions {
+    border: none;
+}
+.font-normal {
+    font-weight: 400 !important;
+}
+.news-link {
+    color: #1890ff !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 75px;
+}
+
+.titler {
+    padding: 16px 2px !important;
+}
+.loader{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+.d-none {
+    display: none !important;
+}
+.btn-sm {
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: smaller !important;
+    font-weight: bold !important;
+}
+.btn-gray {
+    background-color: gainsboro !important;
+    color: gray !important;
+}
+.text-gray {
+    color: gray !important;
+}
+.text-wrap {
+    white-space: normal !important;
+}
+.font-bolder {
+    font-weight: bolder !important;
+}
+.ant-page-header {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    /* white-space: nor; */
+}
+.justify-content-flex-end {
+    justify-content: flex-end !important;
+}
+.white-space-break-spaces {
+    white-space: break-spaces !important;
+}
+.text-ellipsis {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    width: 100% !important;
+    display: block !important;
+  }
