@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCryptoHistory } from "../../Services/cryptoApi";
 import { useEffect } from "react";
 import Loader from "../../pages/Loader";
-import moment from "moment";
+import millify from "millify";
 
 
 const { Title, Paragraph } = Typography;
@@ -26,14 +26,12 @@ function LineChart({ id, name }) {
     chart = <Loader />
   } else {
 
-    const chartData = cHistory?.prices;
-    const coinPrice = [];
-    const coinPriceTimestamp = [];
+    const chartPricesData = cHistory?.prices;
+    const chartData = [];
   
   
-    for (let i = 0; i < chartData.length; i+= 1) {
-        coinPrice.push(chartData[i][1].toFixed());
-        coinPriceTimestamp.push(moment(chartData[i][0]).format('hh:mm A'));
+    for (let i = 0; i < chartPricesData.length; i++ ) {
+        chartData.push([chartPricesData[i][0], chartPricesData[i][1] < 1 ? (+chartPricesData[i][1].toFixed(4)) : chartPricesData[i][1].toFixed()]);
         
     }
   
@@ -41,7 +39,7 @@ function LineChart({ id, name }) {
       series: [
         {
           name: name,
-          data: coinPrice,
+          data: chartData,
           offsetY: 0,
         },
       ],
@@ -50,7 +48,7 @@ function LineChart({ id, name }) {
         chart: {
           width: "100%",
           height: 350,
-          type: "line",
+          type: "area",
           toolbar: {
             show: false,
           },
@@ -66,7 +64,6 @@ function LineChart({ id, name }) {
         stroke: {
           curve: "smooth",
         },
-
         yaxis: {
           labels: {
             style: {
@@ -75,6 +72,9 @@ function LineChart({ id, name }) {
               colors: ["#8c8c8c"],
             },
           },
+          title: {
+            text: 'USD'
+          }
         },
 
         xaxis: {
@@ -82,20 +82,9 @@ function LineChart({ id, name }) {
             style: {
               fontSize: "14px",
               fontWeight: 600,
-              colors: [
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-                "#8c8c8c",
-              ],
             },
           },
-          categories: coinPriceTimestamp,
+          type: 'datetime'
         },
 
         tooltip: {
@@ -106,30 +95,17 @@ function LineChart({ id, name }) {
           },
         },
       },
+
+      
     };
     
     chart = (
       <>
-        <div className="linechart">
-          <div>
-            <Title level={5}>Active Users</Title>
-            <Paragraph className="lastweek">
-              than last week <span className="bnb2">+30%</span>
-            </Paragraph>
-          </div>
-          <div className="sales">
-            <ul>
-              <li>{<MinusOutlined />} Traffic</li>
-              <li>{<MinusOutlined />} Sales</li>
-            </ul>
-          </div>
-        </div>
-
         <ReactApexChart
           className="full-width"
           options={lineChart.options}
           series={lineChart.series}
-          type="line"
+          type="area"
           height={350}
           width={"100%"}
         />

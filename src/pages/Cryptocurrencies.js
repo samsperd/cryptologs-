@@ -97,8 +97,6 @@ const Cryptocurrencies = ({ simplified }) => {
     // }, 10000);
   }, []);
 
-  console.log(cryptos);
-
 
   const data = [];
   let information;

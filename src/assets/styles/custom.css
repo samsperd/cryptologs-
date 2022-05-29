@@ -185,4 +185,7 @@
     white-space: nowrap !important;
     width: 100% !important;
     display: block !important;
-  }
+}
+.w-100 {
+    width: 100% !important;
+}

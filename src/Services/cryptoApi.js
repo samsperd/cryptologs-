@@ -22,9 +22,9 @@ export const getCryptoDetails = createAsyncThunk(
 
 export const getCryptoHistory = createAsyncThunk(
     "crypto/getCryptoHistory", 
-    async({ id }) => await CoinGeckoClient.coins.fetchMarketChartRange(id, {
-        from: 1653511154,
-        to: 1653597554
+    async({ id }) => await CoinGeckoClient.coins.fetchMarketChart(id, {
+        days: 0.051,
+        vs_currency: 'usd'
     })
 );
 

@@ -1,4 +1,4 @@
-import { DollarCircleOutlined, ExclamationCircleOutlined, FundOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined } from '@ant-design/icons';
+import { DollarCircleOutlined, ExclamationCircleOutlined, FundOutlined, MinusOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Divider, Row, Typography } from 'antd';
 import HTMLReactParser from 'html-react-parser';
 import millify from 'millify';
@@ -9,24 +9,11 @@ import { getCryptoDetails } from '../Services/cryptoApi';
 import Loader from './Loader';
 import LineChart from '../components/chart/LineChart';
 import commaNumber from 'comma-number';
+import CryptoOtherStats from '../components/layout/CryptoOtherStats';
+import CryptoStats from '../components/layout/CryptoStats';
+import CryptoLinks from '../components/layout/CryptoLinks';
 
-const { Title, Text } = Typography;
-
-
-function filterArray(item) {
-  let links = [];
-
-  if (item) {
-    if (item.length > 0) {
-      for (let index = 0; index < item.length; index++) {
-        if (item[index] !== "") {
-          links.push(item[index]);
-        }
-      }
-      return links;
-    }
-  }
-}
+const { Title, Text, Paragraph } = Typography;
 
 const CryptoDetails = () => {
   const { id } = useParams();
@@ -65,353 +52,76 @@ const CryptoDetails = () => {
     information = (
       <>
         <Row gutter={[24, 24]}>
-          <Col lg={16} xl={16} md={24} sm={24}>
+          <Col lg={16} xl={16} md={24} sm={24} className='w-100'>
+          <Button type='primary' size='small'>
+              <h6 style={{ color: 'white' }}>Rank #{ details.market_cap_rank }</h6>
+            </Button>
             <Title level={3} className='coin-details-heading'>
               { details.name } Chart
             </Title>
-            <Button type='primary'>
-              <h6 style={{ color: 'white' }}>Rank #{ details.market_cap_rank }</h6>
-            </Button>
-            <Card bordered={false}>
+            <p>
+            { details.name } live price in US dollars. View value statistics, market cap and supply.
+          </p>
+            <Card bordered={false} bodyStyle={{ padding: 0 }}>
+              <div className="linechart">
+              <div>
+                  <Title level={5}>Active Users</Title>
+                  <Paragraph className="lastweek">
+                    than last week <span className="bnb2">+30%</span>
+                  </Paragraph>
+                </div>
+                <div className="sales">
+                  <ul>
+                    <li>{<MinusOutlined />} Traffic</li>
+                    <li>{<MinusOutlined />} Sales</li>
+                  </ul>
+                </div>
+              </div>
+
               <LineChart id={id} name={details.name}></LineChart>
             </Card>
           </Col>
-          <Col lg={8} xl={8} md={24} sm={24}>
+          <Col lg={8} xl={8} md={24} sm={24} className='w-100'>
             <Title level={3} className='coin-details-heading'>
               { details.symbol.toUpperCase() } Price Statistics
             </Title>
             <Card bordered={false}>
-            {
-              stats.map(({ icon, title, value }, i) => (
-              <>
-                <Row className='coin-link' key={i}>
-                  <Col span={12}>
-                    <Title level={5} className='link-name'>
-                    <Text> { icon } </Text>
-                      { title }
-                    </Title>
-                  </Col>
-                  <Col span={12}>
-                    <Text>
-                      { value }
-                    </Text>
-                  </Col>
-                </Row>
-                <Divider></Divider>
-              </>
-              ))
-            }
+              <CryptoStats stats={stats}></CryptoStats>
             </Card>
           </Col>
         </Row>
 
 
         <Row gutter={[24, 24]}>
-          <Col lg={12} xl={12} md={24} sm={24}>
+          <Col lg={12} xl={12} md={24} sm={24} className='w-100'>
             <Title level={3} className='coin-details-heading'>
               What is { details.name }
             </Title>
             { HTMLReactParser(details?.description?.en) }
           </Col>
-          <Col lg={12} xl={12} md={24} sm={24}>
+          <Col lg={12} xl={12} md={24} sm={24} className='w-100'>
             <Title level={3} className='coin-details-heading'>
               Other { details.name } Statistics
             </Title>
             <Card bordered={false}>
-            {
-              genericStats.map(({ icon, title, value }, i) => (
-              <>
-                <Row className='coin-link' key={i}>
-                  <Col span={12}>
-                    <Title level={5} className='link-name'>
-                    <Text> { icon } </Text>
-                      { title }
-                    </Title>
-                  </Col>
-                  <Col span={12}>
-                    <Text>
-                      { value }
-                    </Text>
-                  </Col>
-                </Row>
-                <Divider></Divider>
-              </>
-              ))
-            }
+              <CryptoOtherStats genericStats={genericStats}></CryptoOtherStats>
             </Card>
           </Col>
         </Row>
         
         <Row gutter={[24, 24]}>
-          <Col lg={12} xl={12} md={24} sm={24}>
+          <Col lg={12} xl={12} md={24} sm={24} className='w-100'>
                 <Title level={3} className='coin-details-heading'>
                   What is { details.name }
                 </Title>
                 { HTMLReactParser(details?.description?.en) }
           </Col>
-          <Col lg={12} xl={12} md={24} sm={24} className='container'>
+          <Col lg={12} xl={12} md={24} sm={24} className='container w-100'>
             <Title level={3} className='coin-details-heading'>
               { details.name } Links
             </Title>
             <Card bordered={false}>
-              {
-                details.links.homepage &&
-                  details.links.homepage.length > 0 &&
-                    filterArray(details.links.homepage).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                              <Col span={12}>
-                                <Title level={5} className='link-name'>
-                                  Website:
-                                </Title>
-                              </Col>
-                          {
-                            filterArray(details?.links?.homepage).map((link, i) => (
-                              <Col span={12} key={i}>
-                                <Button type='link' className='width-100'>
-                                <a
-                                  href={link}
-                                  target='_blank'
-                                  rel='noreferrer'
-                                >
-                                  {link}
-                                </a>
-                                </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.announcement_url &&
-                  details.links.announcement_url.length > 0 && 
-                    filterArray(details?.links?.announcement_url).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                              <Col span={12}>
-                                <Title level={5} className='link-name'>
-                                  Announcement URL:
-                                </Title>
-                              </Col>
-                          {
-                            filterArray(details?.links?.announcement_url).map((link, i) => (
-                              <Col span={12} key={i}>
-                                <Button type='link' className='width-100'>
-                                  <a
-                                    href={link}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    className='text-ellipsis'
-                                  >
-                                    {link}
-                                  </a>
-                                </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.blockchain_site &&
-                  details.links.blockchain_site.length > 0 &&
-                    filterArray(details.links.blockchain_site).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                            <Col span={12}>
-                              <Title level={5} className='link-name'>
-                                Blockchain Site:
-                              </Title>
-                            </Col>
-                          {
-                            filterArray(details?.links?.blockchain_site).map((link, i) => (
-                              <Col span={12} key={i}>
-                              <Button type='link' className='width-100 text-justify'>
-                                <a
-                                    href={link}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    className='text-ellipsis'
-                                  >
-                                    {link}
-                                </a>
-                              </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.official_forum_url &&
-                  details.links.official_forum_url.length > 0 && 
-                    filterArray(details.links.official_forum_url).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                            <Col span={12}>
-                              <Title level={5} className='link-name'>
-                                Forum URL:
-                              </Title>
-                            </Col>
-                          {
-                            filterArray(details?.links?.official_forum_url).map((link, i) => (
-                              <Col span={12} key={i}>
-                                <Button type='link' className='width-100'>
-                                <a
-                                  href={link}
-                                  target='_blank'
-                                  rel='noreferrer'
-                                  className='text-ellipsis'
-                                >
-                                  {link}
-                                </a>
-                                </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.bitcointalk_thread_identifier &&
-                  details.links.bitcointalk_thread_identifier.length > 0 && 
-                    filterArray(details.links.bitcointalk_thread_identifier).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                          <Col span={12}>
-                            <Title level={5} className='link-name'>
-                              Bitcointalk:
-                            </Title>
-                          </Col>
-                          {
-                            filterArray(details?.links?.bitcointalk_thread_identifier).map((link, i) => (
-                              <Col span={12} key={i}>
-                                <Button type='link' className='width-100'>
-                                <a
-                                  href={link}
-                                  target='_blank'
-                                  rel='noreferrer'
-                                >
-                                  {link}
-                                </a>
-                                </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.facebook_username &&
-                  <>
-                    <Row className='coin-link'>
-                      <Col span={12}>
-                        <Title level={5} className='link-name'>
-                          Facebook:
-                        </Title>
-                      </Col>
-                      <Col span={12}>
-                        <Button type='link' className='width-100'>
-                          <a
-                            href={'https://facebook.com/'+details.links.facebook_username}
-                            target='_blank'
-                            rel='noreferrer'
-                            className='text-ellipsis'
-                          >
-                            {details.links.facebook_username}
-                          </a>
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Divider></Divider>
-                  </>
-              }
-              {
-                details.links.repos_url?.github &&
-                  details.links.repos_url?.github.length > 0 &&
-                    filterArray(details?.links?.repos_url?.github).length > 0 && 
-                      <>
-                        <Row className='coin-link'>
-                              <Col span={12}>
-                                <Title level={5} className='link-name'>
-                                  Github:
-                                </Title>
-                              </Col>
-                          {
-                            filterArray(details?.links?.repos_url?.github).map((link, i) => (
-                              <Col span={12} key={i}>
-                                <Button type='link' className='width-100 text-justify'>
-                                  <a
-                                    href={link}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    className='text-ellipsis'
-                                  >
-                                    {link}
-                                  </a>
-                                </Button>
-                              </Col>
-                            ))
-                          }
-                        </Row>
-                        <Divider></Divider>
-                      </>
-              }
-              {
-                details.links.subreddit_url &&
-                  <>
-                    <Row className='coin-link'>
-                      <Col span={12}>
-                        <Title level={5} className='link-name'>
-                          Reddit
-                        </Title>
-                      </Col>
-                      <Col span={12}>
-                        <Button type='link' className='width-100'>
-                          <a
-                            href={details.links.subreddit_url}
-                            target='_blank'
-                            rel='noreferrer'
-                            className='text-ellipsis'
-                          >
-                            {details.links.subreddit_url}
-                          </a>
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Divider></Divider>
-                  </>
-              }
-              {
-                details.links.twitter_screen_name &&
-                  <>
-                    <Row className='coin-link'>
-                      <Col span={12}>
-                        <Title level={5} className='link-name'>
-                          Twitter
-                        </Title>
-                      </Col>
-                      <Col span={12}>
-                        <Button type='link' className='width-100'>
-                          <a
-                            href={details.links.twitter_screen_name}
-                            target='_blank'
-                            rel='noreferrer'
-                          >
-                            {details.links.twitter_screen_name}
-                          </a>
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Divider></Divider>
-                  </>
-              }
+              <CryptoLinks links={details.links}></CryptoLinks>
             </Card>
 
           </Col>
