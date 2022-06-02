@@ -3,7 +3,6 @@ import { Avatar, Card, Col, Space, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCryptos } from '../Services/cryptoApi';
-// import millify from 'millify';
 import Loader from './Loader';
 import Statistics from '../components/layout/Statistics';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
@@ -95,7 +94,7 @@ const Cryptocurrencies = ({ simplified }) => {
 
       
     // }, 10000);
-  }, []);
+  }, [maxCurrency, dispatch]);
 
 
   const data = [];
@@ -110,8 +109,8 @@ const Cryptocurrencies = ({ simplified }) => {
         num: cryptos[i]?.market_data?.market_cap_rank,
         icon: <Avatar size={'small'} src={cryptos[i]?.image?.small}></Avatar>,
         name: <Link to={`/crypto/${cryptos[i]?.id}`}><h5>{ cryptos[i]?.name } <br /> <span className='btn-sm btn-gray' >{ cryptos[i]?.market_data?.market_cap_rank }</span> <span className='text-gray text-uppercase'>{ cryptos[i]?.symbol }</span> </h5></Link>,
-        price:  <Link to='/'><h6>${commaNumber(cryptos[i]?.market_data?.current_price?.usd)}</h6></Link>,
-        twofourhour: <Link to='/'><h6 className={
+        price:  <Link to={`/crypto/${cryptos[i]?.id}`}><h6>${commaNumber(cryptos[i]?.market_data?.current_price?.usd)}</h6></Link>,
+        twofourhour: <Link to={`/crypto/${cryptos[i]?.id}`}><h6 className={
                           cryptos[i]?.market_data?.price_change_percentage_24h > 0 ? 'text-success' : 'text-danger'
                           }>
                           { cryptos[i]?.market_data?.price_change_percentage_24h.toFixed(2) > 0 ? (<CaretUpOutlined></CaretUpOutlined> ) : (<CaretDownOutlined></CaretDownOutlined> )
@@ -119,7 +118,7 @@ const Cryptocurrencies = ({ simplified }) => {
                             
                             { Math.abs(cryptos[i]?.market_data?.price_change_percentage_24h.toFixed(2)) }%
                           </h6></Link>,
-        sevendays: <Link to='/'><h6 className={
+        sevendays: <Link to={`/crypto/${cryptos[i]?.id}`}><h6 className={
                       cryptos[i]?.market_data?.price_change_percentage_7d > 0 ? 'text-success' : 'text-danger'
                       }
                     >
@@ -127,13 +126,13 @@ const Cryptocurrencies = ({ simplified }) => {
                           }
                           { Math.abs(cryptos[i]?.market_data?.price_change_percentage_7d.toFixed(2)) }%
                     </h6></Link>,
-        mcap: <Link to='/'><h6>${ commaNumber(cryptos[i]?.market_data?.market_cap?.usd) }</h6></Link>,
-        volume24h: <Link to='/'><h6>${ commaNumber(cryptos[i]?.market_data?.total_volume?.usd) }</h6></Link>,
-        circulatingsupply:  <Link to='/'><h6>{ commaNumber(parseInt(cryptos[i]?.market_data?.circulating_supply).toFixed()) } <span className='text-uppercase'>{ commaNumber(cryptos[i]?.symbol) }</span> </h6></Link>
+        mcap: <Link to={`/crypto/${cryptos[i]?.id}`}><h6>${ commaNumber(cryptos[i]?.market_data?.market_cap?.usd) }</h6></Link>,
+        volume24h: <Link to={`/crypto/${cryptos[i]?.id}`}><h6>${ commaNumber(cryptos[i]?.market_data?.total_volume?.usd) }</h6></Link>,
+        circulatingsupply:  <Link to={`/crypto/${cryptos[i]?.id}`}><h6>{ commaNumber(parseInt(cryptos[i]?.market_data?.circulating_supply).toFixed()) } <span className='text-uppercase'>{ commaNumber(cryptos[i]?.symbol) }</span> </h6></Link>
       });
     }
     information = (
-      <Table loading={loading} columns={columns} pagination={{ pageSize: 50, hideOnSinglePage: true, total: maxCurrency}} dataSource={data} scroll={{ x: 1500 }} />
+      <Table loading={loading} className='overflow-x-scroll' columns={columns} pagination={{ pageSize: 50, hideOnSinglePage: true, total: maxCurrency}} dataSource={data} scroll={{ x: 1500 }} />
     )
   }
   return (
@@ -149,11 +148,11 @@ const Cryptocurrencies = ({ simplified }) => {
             <Title level={4}>
                 Top 10 Cryptocurrencies in the world
             </Title>
-            <Title level={5} className="font-normal">
+            {/* <Title level={5} className="font-normal">
             <Link to="/cryptocurrencies">
               Show More
             </Link>
-            </Title>
+            </Title> */}
           </Space>
           )
           :

@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const CoinGecko = require('coingecko-api');
@@ -9,6 +8,12 @@ export const getCryptos = createAsyncThunk(
     "crypto/getCryptos", 
     async({ limit }) => await CoinGeckoClient.coins.all({ per_page: limit || 250 })
 );
+
+export const getExchanges = createAsyncThunk(
+    "crypto/getExchanges", 
+    async() => await CoinGeckoClient.exchanges.all()
+);
+
 
 export const getStatistics = createAsyncThunk(
     "crypto/getStatistics", 
@@ -23,8 +28,8 @@ export const getCryptoDetails = createAsyncThunk(
 export const getCryptoHistory = createAsyncThunk(
     "crypto/getCryptoHistory", 
     async({ id }) => await CoinGeckoClient.coins.fetchMarketChart(id, {
-        days: 0.051,
-        vs_currency: 'usd'
+        days: 'max',
+        vs_currency: 'usd',
     })
 );
 
@@ -80,6 +85,21 @@ export const getCryptoHistorySlice = createSlice({
         })
     }
 });
+
+export const getExchangesSlice = createSlice({
+    name: "getExchanges",
+    initialState: {
+        exchanges: {},
+        loading: true
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getExchanges.fulfilled, (state, action) => {
+            state.exchanges = action.payload?.data;
+            state.loading = false
+        })
+    }
+});
+
 // export default getCryptosSlice;
 
 

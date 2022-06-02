@@ -1,14 +1,9 @@
-import ReactApexChart from "react-apexcharts";
-import { Typography } from "antd";
-import { MinusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getCryptoHistory } from "../../Services/cryptoApi";
 import { useEffect } from "react";
 import Loader from "../../pages/Loader";
-import millify from "millify";
-
-
-const { Title, Paragraph } = Typography;
+import commaNumber from "comma-number";
+import ApexCharts from "apexcharts";
 
 function LineChart({ id, name }) {
 
@@ -18,7 +13,7 @@ function LineChart({ id, name }) {
   useEffect(() => {
     dispatch(getCryptoHistory({ id }));
   
-  }, []);
+  }, [dispatch, id]);
 
   let chart ;
 
@@ -49,20 +44,46 @@ function LineChart({ id, name }) {
           width: "100%",
           height: 350,
           type: "area",
+          zoom: {
+            autoScaleYaxis: true
+          },
           toolbar: {
             show: false,
           },
         },
-
-        legend: {
-          show: false,
+        annotations: {
+          yaxis: [{
+            y: 40000,
+            borderColor: '#999',
+            label: {
+              show: true,
+              text: 'Support',
+              style: {
+                color: "#fff",
+                background: '#00E396'
+              }
+            }
+          }],
+          xaxis: [{
+            x: new Date('14 Nov 2012').getTime(),
+            borderColor: '#999',
+            yAxisIndex: 0,
+            label: {
+              show: true,
+              text: 'Rally',
+              style: {
+                color: "#fff",
+                background: '#775DD0'
+              }
+            }
+          }]
         },
-
         dataLabels: {
-          enabled: false,
+          enabled: false
         },
-        stroke: {
-          curve: "smooth",
+        markers: {
+          size: 0,
+          style: 'hollow',
         },
         yaxis: {
           labels: {
@@ -71,41 +92,68 @@ function LineChart({ id, name }) {
               fontWeight: 600,
               colors: ["#8c8c8c"],
             },
-          },
-          title: {
-            text: 'USD'
-          }
+            formatter: function (val) {
+              return '$' + commaNumber(val);
+            }
+            },
+          // title: {
+          //   text: 'USD'
+          // }
         },
-
         xaxis: {
+          type: 'datetime',
+          tickAmount: 6,
           labels: {
             style: {
               fontSize: "14px",
               fontWeight: 600,
             },
           },
-          type: 'datetime'
         },
 
+    
+        selection: 'one_year',
+
+
+        legend: {
+          show: false,
+        },
+        stroke: {
+          curve: "smooth",
+        },
+        
         tooltip: {
+          x: {
+            format: 'dd MMM yyyy'
+          },
           y: {
             formatter: function (val) {
               return val;
             },
-          },
+          }
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 100]
+          }
         },
       },
+    
 
       
     };
     
     chart = (
       <>
-        <ReactApexChart
-          className="full-width"
+        <ApexCharts
           options={lineChart.options}
           series={lineChart.series}
           type="area"
+          
           height={350}
           width={"100%"}
         />

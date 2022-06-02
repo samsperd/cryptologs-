@@ -1,7 +1,7 @@
 import { Button, Col, Divider, Row, Typography } from 'antd';
 import React from 'react'
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 function filterArray(item) {
   let links = [];

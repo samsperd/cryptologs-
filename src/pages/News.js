@@ -26,7 +26,7 @@ const News = ({ simplified }) => {
   
     useEffect(() => {
         dispatch(getCryptos({ limit: 50 }));
-    }, []);
+    }, [dispatch]);
 
     const { data: cryptoNewsList, isFetching} = useGetCryptoNewsQuery({newsCategory: newsCategory, count: simplified ? 4 : 50});
     const cryptoNews = cryptoNewsList?.value;

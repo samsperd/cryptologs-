@@ -1,8 +1,76 @@
-import React from 'react'
+import { Col, Collapse, Row, Typography, Avatar } from 'antd';
+import HTMLReactParser from 'html-react-parser';
+import millify from 'millify';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getExchanges } from '../Services/cryptoApi';
+import Loader from './Loader';
+
+const { Panel } = Collapse;
+const { Text } = Typography;
 
 const Exchanges = () => {
+
+  const dispatch = useDispatch();
+  const { exchanges, loading } = useSelector((state) => state.exchanges);
+
+  useEffect(() => {
+    dispatch(getExchanges());
+  
+  }, [dispatch])
+
+  console.log(exchanges);
+  
+  let information;
+
+  if (loading) {
+    information = <Loader />
+  } else {
+    information = (
+      <>
+      <Row>
+        <Col span={2}>#</Col>
+        <Col span={5}>Exchanges</Col>
+        <Col span={5}>Trust Score </Col>
+        <Col span={5}>24h Trade Volume</Col>
+        <Col span={5}>Year Origin</Col>
+      </Row>
+      { exchanges.map((exchange) => (
+              <Row key={exchange.id}>
+                <Collapse bordered={false} style={{ width: '100%' }}>
+                  <Panel
+                    key={exchange.id}
+                    showArrow={false}
+                    header={(
+                      <Row key={exchange.id}>
+                        <Col span={2}>
+                          <Text> <strong> {exchange.trust_score_rank}. </strong> </Text>
+                        </Col>
+                        <Col span={5}>
+                          <Avatar className='exchange-image' src={exchange.image} />
+                          <Text> <strong> {exchange.name} </strong> </Text>
+                        </Col>
+                        <Col span={5}> { exchange.trust_score } </Col>
+                        <Col span={5}> ${millify(exchange.trade_volume_24h_btc)} </Col>
+                        <Col span={5}> { exchange.year_established } </Col>
+                      </Row>
+                    )}
+                  >
+                    { exchange.description && HTMLReactParser(exchange.description) }
+                  </Panel>
+                </Collapse>
+              </Row>
+            ))}
+      
+      </>
+)
+  }
+  
+  
   return (
-    <div>Exchanges</div>
+    <>
+      { information }
+    </>
   )
 }
 

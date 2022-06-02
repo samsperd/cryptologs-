@@ -1,5 +1,5 @@
 import { DollarCircleOutlined, ExclamationCircleOutlined, FundOutlined, MinusOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Divider, Row, Typography } from 'antd';
+import { Button, Card, Col, Row, Typography } from 'antd';
 import HTMLReactParser from 'html-react-parser';
 import millify from 'millify';
 import React, { useEffect } from 'react'
@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getCryptoDetails } from '../Services/cryptoApi';
 import Loader from './Loader';
-import LineChart from '../components/chart/LineChart';
 import commaNumber from 'comma-number';
 import CryptoOtherStats from '../components/layout/CryptoOtherStats';
 import CryptoStats from '../components/layout/CryptoStats';
 import CryptoLinks from '../components/layout/CryptoLinks';
+import CryptoMarkets from '../components/layout/CryptoMarkets';
+import ApexChart from '../components/layout/ApexChart';
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
 const CryptoDetails = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const CryptoDetails = () => {
   useEffect(() => {
     dispatch(getCryptoDetails({ id }))
   
-  }, []);
+  }, [id, dispatch]);
 
 
 
@@ -78,7 +79,7 @@ const CryptoDetails = () => {
                 </div>
               </div>
 
-              <LineChart id={id} name={details.name}></LineChart>
+              <ApexChart id={id} name={details.name}></ApexChart>
             </Card>
           </Col>
           <Col lg={8} xl={8} md={24} sm={24} className='w-100'>
@@ -112,9 +113,9 @@ const CryptoDetails = () => {
         <Row gutter={[24, 24]}>
           <Col lg={12} xl={12} md={24} sm={24} className='w-100'>
                 <Title level={3} className='coin-details-heading'>
-                  What is { details.name }
+                  { details.name } Markets
                 </Title>
-                { HTMLReactParser(details?.description?.en) }
+                <CryptoMarkets markets={details.tickers} ></CryptoMarkets>
           </Col>
           <Col lg={12} xl={12} md={24} sm={24} className='container w-100'>
             <Title level={3} className='coin-details-heading'>

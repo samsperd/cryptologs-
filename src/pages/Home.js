@@ -3,11 +3,13 @@ import {
   Row,
   Typography,
   PageHeader,
+  Button,
 } from "antd";
 import News from "./News";
-// import { Link } from "react-router-dom";
 import { TopGainers, TopLosers } from "../components";
 import Cryptocurrencies from "./Cryptocurrencies";
+import { Link } from "react-router-dom";
+import Trending from "../components/extras/Trending";
 
 const { Title, Text } = Typography;
 
@@ -22,20 +24,23 @@ function Home() {
       </PageHeader>
       <PageHeader
         title="Latest Crypto News"
-        // tags={
-        //     <Link to="/">
-        //       Show More
-        //     </Link>
-        // }
       >
       </PageHeader>
       <News simplified ></News>
       <Row className="mb-24" justify="space-around" gutter={[16, 0]}>
+        <Trending></Trending>
         <TopGainers></TopGainers>
         <TopLosers></TopLosers>
       </Row>
         <Row className="rowgap-vbox" gutter={[24, 0]}>
           <Cryptocurrencies simplified></Cryptocurrencies>
+          <Button block className="btn-gray">
+            <Link to="/cryptocurrencies">
+              <Title level={5} className="font-normal">
+                Show More
+              </Title>
+            </Link>
+          </Button>
         </Row>
     </>
   );

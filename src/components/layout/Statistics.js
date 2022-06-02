@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { Col, Row, Skeleton, Statistic, Typography } from 'antd'
+import { Col, Row, Skeleton, Statistic } from 'antd'
 import { useDispatch, useSelector } from 'react-redux';
 import { getStatistics } from '../../Services/cryptoApi';
 import millify from 'millify';
 
-const { Title } = Typography;
 const Statistics = () => {
     const dispatch = useDispatch();
     const { statistics } = useSelector((state) => state.statistics);
@@ -13,7 +12,7 @@ const Statistics = () => {
     useEffect(() => {
       dispatch(getStatistics())
       
-    }, []);
+    }, [dispatch]);
     let information;
 
     if (Object.keys(statistics).length === 0) {
