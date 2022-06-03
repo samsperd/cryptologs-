@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCryptoHistory } from '../../Services/cryptoApi';
 import Loader from '../../pages/Loader';
-import { Radio, Tabs, Button } from 'antd';
+import { Radio, Button } from 'antd';
 
 // const { TabPane } = Tabs;
 
