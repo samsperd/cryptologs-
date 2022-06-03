@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 const Trending = () => {
       const { data, isFetching } = useGetCryptoTrendsQuery();
-      const trendingList = (data?.coins).slice(0, 5);
+      const trendingList =  data?.coins ? (data?.coins).slice(0, 5) : [];
 
       console.log(data);
 
