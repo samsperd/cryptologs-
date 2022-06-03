@@ -1,6 +1,5 @@
-import { ExclamationOutlined, PlusOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, List, Skeleton, Typography } from 'antd';
 import React from 'react'
+import { Avatar, Card, Col, List, Skeleton, Typography } from 'antd';
 import { useGetCryptoTrendsQuery } from '../../Services/cryptoTrendsApi';
 
 const { Title } = Typography;
