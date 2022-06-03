@@ -22,16 +22,16 @@ const Statistics = () => {
             <>
                 <Row  className='text-center bg-light'>
                     <Col span={12}>
-                    <Statistic title="Total Cryptocurrencies" value={statistics.active_cryptocurrencies} ></Statistic>
+                    <Statistic title="Total Cryptocurrencies" valueStyle={{ color: '#1890ff' }} value={statistics.active_cryptocurrencies} ></Statistic>
                     </Col>
                     <Col span={12}>
-                    <Statistic title="Total Market Cap" value={millify(statistics.total_market_cap?.usd)} ></Statistic>
+                    <Statistic title="Total Market Cap" valueStyle={{ color: '#1890ff' }} value={millify(statistics.total_market_cap?.usd)} ></Statistic>
                     </Col>
                     <Col span={12}>
-                    <Statistic title="Total 24h Volume" value={millify(statistics.total_volume?.usd)} ></Statistic>
+                    <Statistic title="Total 24h Volume" valueStyle={{ color: '#1890ff' }} value={millify(statistics.total_volume?.usd)} ></Statistic>
                     </Col>
                     <Col span={12}>
-                    <Statistic title="Total Markets" value={statistics.markets} ></Statistic>
+                    <Statistic title="Total Markets" valueStyle={{ color: '#1890ff' }} value={statistics.markets} ></Statistic>
                     </Col>
                 </Row>
             </>

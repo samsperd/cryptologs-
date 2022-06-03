@@ -189,3 +189,6 @@
 .w-100 {
     width: 100% !important;
 }
+.text-primary {
+    color: #1890ff !important;
+}
