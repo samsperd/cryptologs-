@@ -69,7 +69,7 @@ const Trending = () => {
                 description={item.item.symbol}
               />
               <div className="amount">
-                {/* <span className='amountcolor}'>{btc.bitcoinrate(currency, item.item.price_btc)}</span> */}
+                {/* <span className='amountcolor}'>{currency, item.item.price_btc}</span> */}
               </div>
             </List.Item>
           )}
