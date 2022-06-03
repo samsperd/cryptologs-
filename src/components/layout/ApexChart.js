@@ -6,10 +6,10 @@ import { getCryptoHistory } from '../../Services/cryptoApi';
 import Loader from '../../pages/Loader';
 import { Radio, Tabs, Button } from 'antd';
 
-const { TabPane } = Tabs;
+// const { TabPane } = Tabs;
 
 
-const ApexChart = ({ id, name }) => {
+const ApexChart = ({ id }) => {
 
     const dispatch = useDispatch();
     const { cHistory, loading } = useSelector((state) => state.cHistory);
