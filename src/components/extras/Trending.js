@@ -6,41 +6,6 @@ import { useGetCryptoTrendsQuery } from '../../Services/cryptoTrendsApi';
 const { Title } = Typography;
 
 const Trending = () => {
-        const yesterday = [
-        {
-          avatar: <PlusOutlined style={{ fontSize: 10 }} />,
-          title: "Stripe",
-          description: "26 March 2021, at 12:30 AM",
-          amount: "+ $750",
-          textclass: "text-fill",
-          amountcolor: "text-success",
-        },
-        {
-          avatar: <PlusOutlined style={{ fontSize: 10 }} />,
-          title: "HubSpot",
-          description: "26 March 2021, at 11:30 AM",
-          amount: "+ $1,050",
-          textclass: "text-fill",
-          amountcolor: "text-success",
-        },
-        {
-          avatar: <PlusOutlined style={{ fontSize: 10 }} />,
-          title: "Creative Tim",
-          description: "26 March 2021, at 07:30 AM",
-          amount: "+ $2,400",
-          textclass: "text-fill",
-          amountcolor: "text-success",
-        },
-        {
-          avatar: <ExclamationOutlined style={{ fontSize: 10 }} />,
-          title: "Webflow",
-          description: "26 March 2021, at 04:00 AM",
-          amount: "Pending",
-          textclass: "text-warning",
-          amountcolor: "text-warning-b",
-        },
-      ];
-      const currency = 'USD';
       const { data, isFetching } = useGetCryptoTrendsQuery();
       const trendingList = (data?.coins).slice(0, 5);
 

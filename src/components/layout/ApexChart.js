@@ -14,7 +14,7 @@ const ApexChart = ({ id, name }) => {
     const dispatch = useDispatch();
     const { cHistory, loading } = useSelector((state) => state.cHistory);
 
-    const [history, setHistory] = useState(cHistory);
+    // const [history, setHistory] = useState(cHistory);
 
     const [chartSelection, setChartSelection] = useState('all');
     // const expensiveGet = (data) => {
@@ -28,9 +28,8 @@ const ApexChart = ({ id, name }) => {
   
     useEffect(() => {
       dispatch(getCryptoHistory({ id }));
-      setHistory(cHistory);
     
-    }, [dispatch, id, history]);
+    }, [dispatch, id]);
 
     
 
@@ -198,7 +197,7 @@ const ApexChart = ({ id, name }) => {
       return (
         <>
           <Button> Price</Button>
-          <Button onClick={() => {setHistory(cHistory?.market_caps); console.log('clicked') }}> Market Cap</Button>
+          <Button> Market Cap</Button>
           <Button> Volumes</Button>
           { priceChart }
         </>
