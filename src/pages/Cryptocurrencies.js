@@ -136,12 +136,12 @@ const Cryptocurrencies = ({ simplified }) => {
         <Table loading={loading} columns={columns} pagination={{ pageSize: 50, hideOnSinglePage: true, total: maxCurrency, onChange: handleChange}} dataSource={data} scroll={{ x: 1500 }} />
         { simplified && (
           <Col flex={'1 1'} style={{ paddingTop: '16px', paddingBottom: '16px' }}>
-            <Button href='/cryptocurrencies' className="btn-gray" style={{ float: 'right' }}>
-              {/* <Link to=""> */}
+            <Button className="btn-gray" style={{ float: 'right' }}>
+              <Link to="">
                 <Title level={5} style={{ lineHeight: '35px', marginBottom: '0' }} className="font-normal">
                   Show More
                 </Title>
-              {/* </Link> */}
+              </Link>
             </Button>
           </Col>
          
