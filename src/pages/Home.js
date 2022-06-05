@@ -1,27 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Row,
   Typography,
   PageHeader,
-  Button,
+  Skeleton,
 } from "antd";
 import News from "./News";
 import { TopGainers, TopLosers } from "../components";
 import Cryptocurrencies from "./Cryptocurrencies";
-import { Link } from "react-router-dom";
 import Trending from "../components/extras/Trending";
+import { useDispatch, useSelector } from "react-redux";
+import { getStatistics } from "../Services/cryptoApi";
+import millify from "millify";
+import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
+
 function Home() {
+  const dispatch = useDispatch();
+  const { statistics } = useSelector((state) => state.statistics);
+
+
+  useEffect(() => {
+    dispatch(getStatistics())
+    
+  }, [dispatch]);
+  let information;
+
+  if (Object.keys(statistics).length === 0) {
+      information = <Skeleton></Skeleton>;
+  } else {
+    information = (
+      <PageHeader
+        title={<Title level={3} className='white-space-break-spaces'>Today’s Cryptocurrencies by Market Cap</Title>}
+        footer={ <Text>The global crypto market cap is {'$' + millify(statistics.total_market_cap?.usd) } { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? (<CaretUpOutlined className="text-success"></CaretUpOutlined> ) : (<CaretDownOutlined className="text-danger"></CaretDownOutlined> ) } ~ a { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) + '%' } { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? ('Increase') : ('Decrease') } over the last day.</Text> }
+      >
+      </PageHeader>
+    )
+  }
+
 
   return (
     <>
-      <PageHeader
-        title={<Title level={3} className='white-space-break-spaces'>Today’s Cryptocurrencies by Market Cap</Title>}
-        footer={ <Text>The global crypto market cap is $1.30T, a 9.51% increase over the last day.</Text> }
-      >
-      </PageHeader>
+      { information }
       <PageHeader
         title="Latest Crypto News"
       >
@@ -34,13 +56,6 @@ function Home() {
       </Row>
         <Row className="rowgap-vbox" gutter={[24, 0]}>
           <Cryptocurrencies simplified></Cryptocurrencies>
-          <Button block className="btn-gray">
-            <Link to="/cryptocurrencies">
-              <Title level={5} className="font-normal">
-                Show More
-              </Title>
-            </Link>
-          </Button>
         </Row>
     </>
   );

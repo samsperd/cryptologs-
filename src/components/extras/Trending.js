@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Card, Col, List, Skeleton, Typography } from 'antd';
 import { useGetCryptoTrendsQuery } from '../../Services/cryptoTrendsApi';
+import fromExponential from 'from-exponential';
 
 const { Title } = Typography;
 
@@ -8,7 +9,6 @@ const Trending = () => {
       const { data, isFetching } = useGetCryptoTrendsQuery();
       const trendingList =  data?.coins ? (data?.coins).slice(0, 5) : [];
 
-      console.log(data);
 
       let information;
 
@@ -28,11 +28,11 @@ const Trending = () => {
                     
                   </Avatar>
                 }
-                title={item.item.name}
-                description={item.item.symbol}
+                title={<>{item.item.name} <span style={{ color: 'gray' }} >({item.item.symbol})</span> </>}
+                description= {<> {fromExponential(item.item.price_btc)}</>}
               />
               <div className="amount">
-                {/* <span className='amountcolor}'>{currency, item.item.price_btc}</span> */}
+                {/* <span className='amountcolor}'>{ item.item.price_btc }</span> */}
               </div>
             </List.Item>
           )}
@@ -43,7 +43,6 @@ const Trending = () => {
 
 
  return (
-    <>
         <Col span={24} md={8} className="mb-24 mt-2">
             {/* <Title level={4}>
                 Top Gainers
@@ -54,14 +53,13 @@ const Trending = () => {
             className="header-solid h-full bg-transparent ant-list-yes tipper"
             title={
               <Title level={4}>
-                  Trending
+                  Trending <small className='text-gray' >(24H)</small>
               </Title>
             }
           >
           { information }
           </Card>
         </Col>
-    </>
   )
 }
 

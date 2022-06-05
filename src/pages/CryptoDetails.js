@@ -1,4 +1,4 @@
-import { DollarCircleOutlined, ExclamationCircleOutlined, FundOutlined, MinusOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined } from '@ant-design/icons';
+import { DollarCircleOutlined, ExclamationCircleOutlined, FundOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Row, Typography } from 'antd';
 import HTMLReactParser from 'html-react-parser';
 import millify from 'millify';
@@ -13,13 +13,14 @@ import CryptoStats from '../components/layout/CryptoStats';
 import CryptoLinks from '../components/layout/CryptoLinks';
 import CryptoMarkets from '../components/layout/CryptoMarkets';
 import ApexChart from '../components/layout/ApexChart';
+import ConnectionProblem from '../components/extras/ConnectionProblem';
 
 const { Title, Paragraph } = Typography;
 
 const CryptoDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { details, loading } = useSelector((state) => state.details);
+  const { details, loading, connection } = useSelector((state) => state.details);
 
   useEffect(() => {
     dispatch(getCryptoDetails({ id }))
@@ -31,19 +32,23 @@ const CryptoDetails = () => {
   let information;
 
   if (loading) {
-    information = <Loader />
+    if (connection) {
+      information = <Loader />
+    } else {
+      information = <ConnectionProblem></ConnectionProblem>
+    }
   } else {
 
     const stats = [
       { title: 'Price to USD', value: `$ ${details?.market_data?.current_price?.usd && commaNumber(details?.market_data?.current_price?.usd)}`, icon: <DollarCircleOutlined /> },
-      { title: 'Fully Diluted Market Cap', value: `$ ${details?.market_data?.fully_diluted_valuation?.usd && commaNumber(details?.market_data?.fully_diluted_valuation?.usd)}`, icon: <DollarCircleOutlined /> },
-      { title: 'Market Cap', value: `$ ${details?.market_data?.market_cap?.usd && commaNumber(details?.market_data?.market_cap?.usd)}`, icon: <DollarCircleOutlined /> },
-      { title: '24h Volume', value: `$ ${details?.market_data?.total_volume?.usd && commaNumber(details?.market_data?.total_volume?.usd)}`, icon: <ThunderboltOutlined /> },
+      { title: 'Fully Diluted Market Cap', value: details?.market_data?.fully_diluted_valuation?.usd && `$ ${details?.market_data?.fully_diluted_valuation?.usd && commaNumber(details?.market_data?.fully_diluted_valuation?.usd)}`, icon: <DollarCircleOutlined /> },
+      { title: 'Market Cap', value: details?.market_data?.market_cap?.usd && `$ ${details?.market_data?.market_cap?.usd && commaNumber(details?.market_data?.market_cap?.usd)}`, icon: <DollarCircleOutlined /> },
+      { title: '24h Volume', value: details?.market_data?.total_volume?.usd && `$ ${details?.market_data?.total_volume?.usd && commaNumber(details?.market_data?.total_volume?.usd)}`, icon: <ThunderboltOutlined /> },
       { title: 'All-time-high(daily avg.)', value: `$ ${millify(details?.market_data?.high_24h?.usd)}`, icon: <TrophyOutlined /> },
     ];
   
     const genericStats = [
-      { title: 'Circulating Supply', value: `$ ${millify(details?.market_data?.circulating_supply)}`, icon: <ExclamationCircleOutlined /> },
+      { title: 'Circulating Supply', value: details?.market_data?.circulating_supply && `$ ${millify(details?.market_data?.circulating_supply)}`, icon: <ExclamationCircleOutlined /> },
       { title: 'Total Supply', value: details?.market_data?.total_supply && `$ ${millify(details?.market_data?.total_supply)}`, icon: <NumberOutlined /> },
       { title: 'Genesis Date', value: details.genesis_date, icon: <FundOutlined /> },
       { title: 'CoinGecko Score', value: details.coingecko_score, icon: <FundOutlined /> },
@@ -65,17 +70,22 @@ const CryptoDetails = () => {
           </p>
             <Card bordered={false} bodyStyle={{ padding: 0 }}>
               <div className="linechart">
-              <div>
-                  <Title level={5}>Active Users</Title>
+                <div>
+                  <Title level={5}>Price Chart</Title>
                   <Paragraph className="lastweek">
-                    than last week <span className="bnb2">+30%</span>
+                    24 hour (%) {
+                          details?.market_data?.price_change_percentage_24h > 0 ? 'Increase' : 'Decrease'
+                          } <span className={
+                          details?.market_data?.price_change_percentage_24h > 0 ? 'bnb2' : 'text-danger'
+                          }>
+                    { details?.market_data?.price_change_percentage_24h.toFixed(2) > 0 ? ('+') : ('-')
+                          }
+                            
+                            { Math.abs(details?.market_data?.price_change_percentage_24h.toFixed(2)) + '%' }
+                    </span>
                   </Paragraph>
                 </div>
                 <div className="sales">
-                  <ul>
-                    <li>{<MinusOutlined />} Traffic</li>
-                    <li>{<MinusOutlined />} Sales</li>
-                  </ul>
                 </div>
               </div>
 

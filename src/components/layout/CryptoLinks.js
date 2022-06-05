@@ -268,7 +268,7 @@ const CryptoLinks = ({ links }) => {
                       <Col span={12}>
                         <Button type='link' className='width-100'>
                           <a
-                            href={links.twitter_screen_name}
+                            href={'https://twitter.com/'+links.twitter_screen_name}
                             target='_blank'
                             rel='noreferrer'
                           >

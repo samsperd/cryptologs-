@@ -4,9 +4,20 @@ const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 
 
+
 export const getCryptos = createAsyncThunk(
     "crypto/getCryptos", 
     async({ limit }) => await CoinGeckoClient.coins.all({ per_page: limit || 250 })
+);
+
+export const getCryptosStatsGainer = createAsyncThunk(
+    "crypto/getCryptosStatsGainer", 
+    async({ limit }) => await CoinGeckoClient.coins.all({ per_page: limit || 5, order: CoinGecko.ORDER.HOUR_24_DESC })
+);
+
+export const getCryptosStatsLoser = createAsyncThunk(
+    "crypto/getCryptosStatsLoser", 
+    async({ limit }) => await CoinGeckoClient.coins.all({ per_page: limit || 5, order: CoinGecko.ORDER.HOUR_24_ASC })
 );
 
 export const getExchanges = createAsyncThunk(
@@ -37,13 +48,19 @@ export const getCryptosSlice = createSlice({
     name: "getCryptos",
     initialState: {
         cryptos: {},
-        loading: true
+        loading: true,
+        connection: true,
+
     },
     extraReducers: (builder) => {
         builder.addCase(getCryptos.fulfilled, (state, action) => {
             state.cryptos = action.payload?.data;
             state.loading = false
         })
+        builder.addCase(getCryptos.rejected, (state) => {
+            state.connection = false
+        })
+        
     }
 });
 
@@ -63,12 +80,16 @@ export const getCryptoDetailsSlice = createSlice({
     name: "getCryptoDetails",
     initialState: {
         details: {},
-        loading: true
+        loading: true,
+        connection: true
     },
     extraReducers: (builder) => {
         builder.addCase(getCryptoDetails.fulfilled, (state, action) => {
             state.details = action.payload?.data;
             state.loading = false
+        })
+        builder.addCase(getCryptoDetails.rejected, (state) => {
+            state.connection = false
         })
     }
 });
@@ -90,16 +111,53 @@ export const getExchangesSlice = createSlice({
     name: "getExchanges",
     initialState: {
         exchanges: {},
-        loading: true
+        loading: true,
+        connection: true
     },
     extraReducers: (builder) => {
         builder.addCase(getExchanges.fulfilled, (state, action) => {
             state.exchanges = action.payload?.data;
             state.loading = false
         })
+        builder.addCase(getExchanges.rejected, (state) => {
+            state.connection = false
+        })
     }
 });
-
+export const getCryptosStatsGainerSlice = createSlice({
+    name: "getCryptosStatsGainer",
+    initialState: {
+        cryptosStatsGainer: {},
+        loading: true,
+        connection: true
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getCryptosStatsGainer.fulfilled, (state, action) => {
+            state.cryptosStatsGainer = action.payload?.data;
+            state.loading = false
+        })
+        builder.addCase(getCryptosStatsGainer.rejected, (state) => {
+            state.connection = false
+        })
+    }
+});
+export const getCryptosStatsLoserSlice = createSlice({
+    name: "getCryptosStatsLoser",
+    initialState: {
+        cryptosStatsLoser: {},
+        loading: true,
+        connection: true
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getCryptosStatsLoser.fulfilled, (state, action) => {
+            state.cryptosStatsLoser = action.payload?.data;
+            state.loading = false
+        })
+        builder.addCase(getCryptosStatsLoser.rejected, (state) => {
+            state.connection = false
+        })
+    }
+});
 // export default getCryptosSlice;
 
 

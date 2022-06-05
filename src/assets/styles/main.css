@@ -3031,6 +3031,9 @@ aside.ant-layout-sider.ant-layout-sider-light.sider-primary.ant-layout-sider-pri
   .ant-btn.ant-full-box {
   box-shadow: none;
 }
+.shadow-none {
+  box-shadow: none !important;
+}
 
 .ant-btn-dashed {
   color: rgba(0, 0, 0, 0.65);

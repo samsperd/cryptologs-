@@ -22,6 +22,17 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+.ant-table-content::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    height: 8px;
+}
+.ant-table-content::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.7);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
 /* .overflow-x-scroll:hover::-webkit-scrollbar-thumb {
     background-color: rgba(100, 100, 100, 0.7);
     border-radius: 4px;
@@ -158,6 +169,7 @@
 .btn-gray {
     background-color: gainsboro !important;
     color: gray !important;
+    border: none !important;
 }
 .text-gray {
     color: gray !important;

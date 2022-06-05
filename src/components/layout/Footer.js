@@ -65,7 +65,7 @@ return (
     </Menu>
     <p className="copyright">
       {" "}
-      Copyright © 2021 Muse by <a href="#pablo">Creative Tim</a>.{" "}
+      Copyright © 2021 Made by <a href="#pablo"> SlickStubborn </a>.{" "}
     </p>
   </AntFooter>
 );

@@ -8,6 +8,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCryptos } from '../Services/cryptoApi';
 import Loader from './Loader';
+import { Link } from 'react-router-dom';
 
 
 const { Meta } = Card;
@@ -156,12 +157,15 @@ const News = ({ simplified }) => {
                 <Card
                     style={{ width: 250 }}
                     bordered={false}
-                    className="criclebox news bg-transparent"
-                    bodyStyle={{ height: '100%' }}
+                    className="criclebox news bg-transparent shadow-none"
+                    bodyStyle={{ height: '100%', backgroundColor: 'transparent' }}
                 >
-                    <Button className='d-flex bg-transparent justify-content-center aligin-center' block type='link' href='/news' style={{ height: '100%' }}>
-
-                        <RightCircleFilled style={{ color: 'gray', fontSize: '50px' }} key="arrowright" />,
+                    <Button className='d-flex bg-transparent justify-content-center aligin-center' block type='link' style={{ height: '100%' }}>
+                        <Link to={'/news'}>
+                            <RightCircleFilled style={{ color: 'gray', fontSize: '50px' }} key="arrowright" />
+                            <br />
+                            <small>Show more</small>
+                        </Link>
                     </Button>
                 </Card>
             )}

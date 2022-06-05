@@ -1,41 +1,25 @@
 import React, { useEffect } from 'react';
-import { Avatar, Card, Col, Space, Table, Typography } from 'antd';
+import { Avatar, Button, Card, Col, Row, Space, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCryptos } from '../Services/cryptoApi';
 import Loader from './Loader';
 import Statistics from '../components/layout/Statistics';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+import ConnectionProblem from '../components/extras/ConnectionProblem';
+
 
 const commaNumber = require('comma-number');
 const { Title } = Typography;
 
 const columns = [
-  // {
-  //   title: '#',
-  //   width: 20,
-  //   dataIndex: 'num',
-  //   key: 'num',
-  //   fixed: 'left',
-  // },
   {
     title: 'Name',
-    className: 'bg-white',
-    children: [
-      {
-        dataIndex: 'icon',
-        key: 'icon',
-        fixed: 'left',
-        width: 40
-      },
-      {
-        width: 50,
-        dataIndex: 'name',
-        fixed: 'left',
-        key: 'name',
-        className: 'text-wrap px-5'
-      }
-    ]
+    className: 'bg-white text-wrap px-5',
+    key: 'name',
+    width: 80,
+    dataIndex: 'name',
+    fixed: 'left',
   },
   {
     title: 'Price',
@@ -85,7 +69,7 @@ const columns = [
 const Cryptocurrencies = ({ simplified }) => {
   
   const dispatch = useDispatch();
-  const { cryptos, loading } = useSelector((state) => state.cryptos);
+  const { cryptos, loading, connection } = useSelector((state) => state.cryptos);
   const maxCurrency = simplified ? 10 : 250;
 
   useEffect(() => {
@@ -96,19 +80,35 @@ const Cryptocurrencies = ({ simplified }) => {
     // }, 10000);
   }, [maxCurrency, dispatch]);
 
+  const handleChange = () => {
+    window.scrollTo(0,2);
+  }
+
 
   const data = [];
   let information;
+
   if (Object.keys(cryptos).length === 0) {
-    information = <Loader />
+    if (connection) {
+      information = <Loader />
+    } else {
+      information = <ConnectionProblem></ConnectionProblem>
+    }
   } else {
     for (let i = 0; i < maxCurrency; i++) {
-      // console.log(cryptos[i]);
        data.push({
         key: i + 1,
         num: cryptos[i]?.market_data?.market_cap_rank,
-        icon: <Avatar size={'small'} src={cryptos[i]?.image?.small}></Avatar>,
-        name: <Link to={`/crypto/${cryptos[i]?.id}`}><h5>{ cryptos[i]?.name } <br /> <span className='btn-sm btn-gray' >{ cryptos[i]?.market_data?.market_cap_rank }</span> <span className='text-gray text-uppercase'>{ cryptos[i]?.symbol }</span> </h5></Link>,
+        name: <Link to={`/crypto/${cryptos[i]?.id}`}>
+        <Row gutter={[ 24, 0 ]}>
+          <Col span={5}>
+          <Avatar size={'small'} src={cryptos[i]?.image?.small}></Avatar>
+          </Col>
+          <Col span={19}>
+            <h5>{ cryptos[i]?.name } <br /> <span className='btn-sm btn-gray' >{ cryptos[i]?.market_data?.market_cap_rank }</span> <span className='text-gray text-uppercase'>{ cryptos[i]?.symbol }</span> </h5>
+          </Col>
+        </Row>
+        </Link>,
         price:  <Link to={`/crypto/${cryptos[i]?.id}`}><h6>${commaNumber(cryptos[i]?.market_data?.current_price?.usd)}</h6></Link>,
         twofourhour: <Link to={`/crypto/${cryptos[i]?.id}`}><h6 className={
                           cryptos[i]?.market_data?.price_change_percentage_24h > 0 ? 'text-success' : 'text-danger'
@@ -132,7 +132,21 @@ const Cryptocurrencies = ({ simplified }) => {
       });
     }
     information = (
-      <Table loading={loading} className='overflow-x-scroll' columns={columns} pagination={{ pageSize: 50, hideOnSinglePage: true, total: maxCurrency}} dataSource={data} scroll={{ x: 1500 }} />
+      <>
+        <Table loading={loading} columns={columns} pagination={{ pageSize: 50, hideOnSinglePage: true, total: maxCurrency, onChange: handleChange}} dataSource={data} scroll={{ x: 1500 }} />
+        { simplified && (
+          <Col flex={'1 1'} style={{ paddingTop: '16px', paddingBottom: '16px' }}>
+            <Button href='/cryptocurrencies' className="btn-gray" style={{ float: 'right' }}>
+              {/* <Link to=""> */}
+                <Title level={5} style={{ lineHeight: '35px', marginBottom: '0' }} className="font-normal">
+                  Show More
+                </Title>
+              {/* </Link> */}
+            </Button>
+          </Col>
+         
+       ) }
+      </>
     )
   }
   return (
@@ -158,14 +172,14 @@ const Cryptocurrencies = ({ simplified }) => {
           :
           (
             <>
-            <div className='text-center'>
-              <Title level={4}>
-                  Cryptocurrencies prices live
-              </Title>
-              <Title level={5}>
-                  Top Cryptocurrencies by market cap
-              </Title>
-            </div>
+              <div className='text-center'>
+                <Title level={4}>
+                    Cryptocurrencies prices live
+                </Title>
+                <Title level={5}>
+                    Top Cryptocurrencies by market cap
+                </Title>
+              </div>
             </>
           )
         }

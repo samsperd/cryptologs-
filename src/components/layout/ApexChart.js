@@ -4,9 +4,8 @@ import ReactApexChart from "react-apexcharts";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCryptoHistory } from '../../Services/cryptoApi';
 import Loader from '../../pages/Loader';
-import { Radio, Button } from 'antd';
+import { Radio } from 'antd';
 
-// const { TabPane } = Tabs;
 
 
 const ApexChart = ({ id }) => {
@@ -17,13 +16,9 @@ const ApexChart = ({ id }) => {
     // const [history, setHistory] = useState(cHistory);
 
     const [chartSelection, setChartSelection] = useState('all');
-    // const expensiveGet = (data) => {
-    //     return data.prices;
-    // }
-    const chartPricesData = cHistory?.prices || [];
-        
 
-    // const chartPricesData = useMemo(() => expensiveGet(cHistory), [cHistory]);
+    const chartPricesData = cHistory?.prices || [];
+
 
   
     useEffect(() => {
@@ -33,15 +28,18 @@ const ApexChart = ({ id }) => {
 
     
 
-    const chartPrices = [];
+    let chartPrices = [];
+    let lastPrice;
+
+
 
     let priceChart;
 
     if (loading) {
       priceChart = <Loader />
     } else {
-        
-  
+      
+      lastPrice = chartPricesData[0][0] || new Date().getTime();
 
         for (let i = 0; i < chartPricesData.length; i++ ) {
             chartPrices.push([chartPricesData[i][0], chartPricesData[i][1] < 1 ? (+chartPricesData[i][1].toFixed(4)) : chartPricesData[i][1].toFixed()]);
@@ -137,7 +135,7 @@ const ApexChart = ({ id }) => {
             </div>
         )
 
-            }
+    }
     const updateData = (timeline) => {
       setChartSelection(timeline)
     
@@ -178,7 +176,7 @@ const ApexChart = ({ id }) => {
           ApexCharts.exec(
             'area-datetime',
             'zoomX',
-            new Date('27 Feb 2010').getTime(),
+            lastPrice,
             new Date().getTime(),
           )
           break
@@ -196,10 +194,7 @@ const ApexChart = ({ id }) => {
 
       return (
         <>
-          <Button> Price</Button>
-          <Button> Market Cap</Button>
-          <Button> Volumes</Button>
-          { priceChart }
+        { priceChart }
         </>
 
 

@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "coingecko-api": "^1.0.10",
     "comma-number": "^2.1.0",
+    "from-exponential": "^1.1.1",
     "html-react-parser": "^1.4.12",
     "install": "^0.13.0",
     "millify": "^4.0.0",
