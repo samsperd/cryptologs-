@@ -204,3 +204,7 @@
 .text-primary {
     color: #1890ff !important;
 }
+.font-choice {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold !important;
+}

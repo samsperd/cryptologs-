@@ -63,9 +63,10 @@ const CryptoDetails = () => {
               <h6 style={{ color: 'white' }}>Rank #{ details.market_cap_rank }</h6>
             </Button>
             <Title level={3} className='coin-details-heading'>
-              { details.name } Chart
+              { details.name } <span className='text-uppercase' >({ details.symbol })</span>
             </Title>
-            <p>
+            <Title level={3} className='font-choice' > {details?.market_data?.current_price?.usd && '$' + commaNumber(details?.market_data?.current_price?.usd)}</Title>
+                        <p>
             { details.name } live price in US dollars. View value statistics, market cap and supply.
           </p>
             <Card bordered={false} bodyStyle={{ padding: 0 }}>
