@@ -34,7 +34,7 @@ function Home() {
     information = (
       <PageHeader
         title={<Title level={3} className='white-space-break-spaces'>Today’s Cryptocurrencies by Market Cap</Title>}
-        footer={ <Text>The global crypto market cap is {'$' + millify(statistics.total_market_cap?.usd) } { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? (<CaretUpOutlined className="text-success"></CaretUpOutlined> ) : (<CaretDownOutlined className="text-danger"></CaretDownOutlined> ) } ~ a { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) + '%' } { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? ('Increase') : ('Decrease') } over the last day.</Text> }
+        footer={ <Text>The global crypto market cap is <b className="text-muted">{'$' + millify(statistics.total_market_cap?.usd) }</b>  { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? (<CaretUpOutlined className="text-success"></CaretUpOutlined> ) : (<CaretDownOutlined className="text-danger"></CaretDownOutlined> ) } ~ a <b className={ Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? ('text-success') : ('text-danger') } >{ Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) + '%' } </b> { Math.abs(statistics.market_cap_change_percentage_24h_usd).toFixed(2) > 0 ? ('Increase') : ('Decrease') } over the last day.</Text> }
       >
       </PageHeader>
     )
