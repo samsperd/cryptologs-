@@ -26,6 +26,7 @@ function Home() {
     dispatch(getStatistics())
     
   }, [dispatch]);
+
   let information;
 
   if (Object.keys(statistics).length === 0) {

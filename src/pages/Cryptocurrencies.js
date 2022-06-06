@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Card, Col, Row, Space, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -58,27 +58,25 @@ const columns = [
     key: 'circulatingsupply',
     width: 75,
   },
-  {
-    title: 'Last 7 Days',
-    dataIndex: 'last7days',
-    key: 'last7days',
-    width: 150,
-  },
 ];
 
 const Cryptocurrencies = ({ simplified }) => {
   
   const dispatch = useDispatch();
-  const { cryptos, loading, connection } = useSelector((state) => state.cryptos);
+  const { loading, connection } = useSelector((state) => state.cryptos);
   const maxCurrency = simplified ? 10 : 250;
 
-  useEffect(() => {
-    // setInterval(() => {
-      dispatch(getCryptos({ limit: maxCurrency }));
+  const [cryptos, setCryptos] = useState({});
 
-      
-    // }, 10000);
-  }, [maxCurrency, dispatch]);
+  useEffect(() => {
+      dispatch(getCryptos({ limit: maxCurrency }))
+      .unwrap()
+      .then((response) => {
+        setCryptos(response?.data)
+      })
+      .catch(console.log('error'))
+  
+  }, [maxCurrency, dispatch, cryptos]);
 
   const handleChange = () => {
     window.scrollTo(0,2);

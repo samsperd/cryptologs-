@@ -5,12 +5,6 @@ import { Link } from 'react-router-dom';
 
   
   const columns = [
-    // {
-    //     title: '#',
-    //     dataIndex: 'num',
-    //     key: 'num',
-    //     width: 15,
-    // },
     {
       title: 'Name',
       dataIndex: 'name',
@@ -33,7 +27,7 @@ import { Link } from 'react-router-dom';
         title: 'Spread',
         dataIndex: 'spread',
         key: 'spread',
-        width: 65,
+        width: 80,
     },
     {
       title: 'Volume',

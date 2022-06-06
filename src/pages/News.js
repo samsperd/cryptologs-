@@ -45,6 +45,10 @@ const News = ({ simplified }) => {
 
     let information;
 
+    console.log('====================================');
+    console.log(cryptoNews);
+    console.log('====================================');
+
     if (isFetching) {
         return <Loader />;
     }

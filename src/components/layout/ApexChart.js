@@ -182,11 +182,11 @@ const ApexChart = ({ id }) => {
           break
         default:
             ApexCharts.exec(
-                'area-datetime',
-                'zoomX',
-                new Date().setMonth(new Date().getMonth() - 1),
-                new Date().getTime()
-            )
+              'area-datetime',
+              'zoomX',
+              lastPrice,
+              new Date().getTime(),
+              )
             break
           }
     }

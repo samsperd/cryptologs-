@@ -13,11 +13,7 @@ const TopLosers = () => {
   const { cryptosStatsLoser, loading } = useSelector((state) => state.cryptosStatsLoser);
 
   useEffect(() => {
-    // setInterval(() => {
       dispatch(getCryptosStatsLoser({ limit: 5 }));
-
-      
-    // }, 10000);
   }, [ dispatch]);
 
 
@@ -55,9 +51,6 @@ const TopLosers = () => {
   return (
     <>
         <Col span={24} md={8} className="mb-24 mt-2">
-            {/* <Title level={4}>
-                Top Losers
-            </Title> */}
           <Card
             bordered={false}
             bodyStyle={{ paddingTop: 0 }}
