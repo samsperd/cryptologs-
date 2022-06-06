@@ -39,21 +39,21 @@ return (
 
     <Menu mode="horizontal" className="menu-nav-social" defaultSelectedKeys={["1"]}>
       <Menu.Item key={1}>
-        <Link to="https://www.linkedin.com/in/obinna-iloeje-15183a202" target={'_blank'}  rel="noopener noreferrer">{<DribbbleOutlined />}</Link>
+        <a href="https://www.linkedin.com/in/obinna-iloeje-15183a202" target={'_blank'}  rel="noopener noreferrer">{<DribbbleOutlined />}</a>
       </Menu.Item>
       <Menu.Item key={2}>
-        <Link to="https://twitter.com/samsperd" target={'_blank'}  rel="noopener noreferrer">{<TwitterOutlined />}</Link>
+        <a href="https://twitter.com/samsperd" target={'_blank'}  rel="noopener noreferrer">{<TwitterOutlined />}</a>
       </Menu.Item>
       <Menu.Item key={3}>
-        <Link to="https://www.instagram.com/djinpod" target={'_blank'}  rel="noopener noreferrer">
+        <a href="https://www.instagram.com/djinpod" target='_blank'  rel="noopener noreferrer">
           {<InstagramOutlined />}
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item key={4}>
-        <Link target={'_blank'}  rel="noopener noreferrer" to="https://www.linkedin.com/in/obinna-iloeje-15183a202">{<LinkedinOutlined />}</Link>
+        <a target={'_blank'}  rel="noopener noreferrer" href="https://www.linkedin.com/in/obinna-iloeje-15183a202">{<LinkedinOutlined />}</a>
       </Menu.Item>
       <Menu.Item key={5}>
-        <Link to="https://github.com/samsperd" target={'_blank'}  rel="noopener noreferrer">{<GithubOutlined />}</Link>
+        <a href="https://github.com/samsperd" target={'_blank'}  rel="noopener noreferrer">{<GithubOutlined />}</a>
       </Menu.Item>
     </Menu>
     <p className="copyright">
