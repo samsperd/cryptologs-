@@ -1,5 +1,4 @@
-import { StarOutlined } from '@ant-design/icons';
-import { Button, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import NavDrawer from './NavDrawer';
@@ -66,11 +65,11 @@ const Navbar = () => {
                 )) }
                 </Menu>
             </div>
-            <div className="header-col header-btn">
+            {/* <div className="header-col header-btn">
                 <Button type='link'>
                     <StarOutlined style={{ color: 'black', fontSize: '16px' }}></StarOutlined>
                 </Button>
-            </div>
+            </div> */}
             <div className="header-col header-btn">
             {
                 activeMenu && (

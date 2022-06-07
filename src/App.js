@@ -11,6 +11,7 @@ import Cryptocurrencies from "./pages/Cryptocurrencies";
 import Exchanges from "./pages/Exchanges";
 import News from "./pages/News";
 import CryptoDetails from "./pages/CryptoDetails";
+import ScrollToTop from "./components/extras/ScrollToTop";
 
 const { Content } = Layout;
 
@@ -21,6 +22,7 @@ function App() {
         <TopNav></TopNav>
         <Navbar></Navbar>
         <Content className="container">
+          <ScrollToTop>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/cryptocurrencies" component={Cryptocurrencies} />
@@ -28,6 +30,7 @@ function App() {
               <Route exact path="/exchanges" component={Exchanges} />
               <Route exact path="/news" component={News} />
             </Switch>
+          </ScrollToTop>
         </Content>
         <Footer></Footer>
       </Layout>
