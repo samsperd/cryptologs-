@@ -42,7 +42,7 @@ const ApexChart = ({ id }) => {
       lastPrice = chartPricesData[0][0] || new Date().getTime();
 
         for (let i = 0; i < chartPricesData.length; i++ ) {
-            chartPrices.push([chartPricesData[i][0], chartPricesData[i][1] < 1 ? (+chartPricesData[i][1].toFixed(4)) : chartPricesData[i][1].toFixed()]);
+            chartPrices.push([chartPricesData[i][0], (+chartPricesData[i][1]) < 1 ? (+chartPricesData[i][1].toFixed(4)) : (+chartPricesData[i][1].toFixed())]);
             
         }
         let chartInfo =  {
@@ -89,46 +89,13 @@ const ApexChart = ({ id }) => {
         priceChart = (
             <div id="price_chart">
                 <Radio.Group value={chartSelection} onChange={(e) => updateData(e.target.value)}>
+                    <Radio.Button value="7D">7D</Radio.Button>
                     <Radio.Button value="one_month">1M</Radio.Button>
                     <Radio.Button value="six_months">6M</Radio.Button>
                     <Radio.Button value="one_year">1Y</Radio.Button>
                     <Radio.Button value="ytd">YTD</Radio.Button>
                     <Radio.Button value="all">ALL</Radio.Button>
                 </Radio.Group>
-
-                {/* <div>
-                    <button id="one_month"
-                        
-                        onClick={() => updateData('one_month')} className={ (chartSelection ==='one_month' ? 'active' : '')}>
-                    1M
-                    </button>
-                    &nbsp;
-                    <button id="six_months"
-                        
-                        onClick={()=>updateData('six_months')} className={ (chartSelection ==='six_months' ? 'active' : '')}>
-                    6M
-                    </button>
-                    &nbsp;
-                    <button id="one_year"
-                        
-                        
-                        onClick={()=>updateData('one_year')} className={ (chartSelection ==='one_year' ? 'active' : '')}>
-                    1Y
-                    </button>
-                    &nbsp;
-                    <button id="ytd"
-                        
-                        onClick={()=> updateData('ytd')} className={ (chartSelection ==='ytd' ? 'active' : '')}>
-                    YTD
-                    </button>
-                    &nbsp;
-                    <button id="all"
-                        
-                        onClick={()=> updateData('all')} className={ (chartSelection ==='all' ? 'active' : '')}>
-                    ALL
-                    </button>
-                </div> */}
-
                 <div>
                     <ReactApexChart options={chartInfo.options} series={chartInfo.series} type="area" height={350} />
                 </div>
@@ -136,11 +103,20 @@ const ApexChart = ({ id }) => {
         )
 
     }
+    
     const updateData = (timeline) => {
       setChartSelection(timeline)
     
       switch (timeline) {
-        case 'one_month':
+          case '7D':
+            ApexCharts.exec(
+              'area-datetime',
+              'zoomX',
+              new Date().setDate(new Date().getDate() - 7),
+              new Date().getTime(),
+            )
+            break
+          case 'one_month':
           ApexCharts.exec(
             'area-datetime',
             'zoomX',
