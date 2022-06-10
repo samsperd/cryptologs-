@@ -1,144 +1,62 @@
-# [Muse Ant Design Dashboard](https://demos.creative-tim.com/muse-ant-design-dashboard/#/dashboard?ref=readme-madd)
+# [Cryptocurrency Prices, Charts, Market Capitalizations](https://cryptologs.netlify.app)
 
-![version](https://img.shields.io/badge/version-1.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/muse-ant-design-dashboard.svg)](https://github.com/creativetimofficial/muse-ant-design-dashboard/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-tailwind-dashboard-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/muse-ant-design-dashboard/issues?q=is%3Aissue+is%3Aclosed)
-
-![Image](https://s3.amazonaws.com/creativetim_bucket/products/496/original/opt_md_ant_react_thumbnail.jpg?1629182839)
-
-Muse Ant Design Dashboard is a _free_ Admin Template based on two popular front-end technologies: _Ant Design & React_. It was built to simplify the developer's work and is comes with a fresh design inspired by Ant Design. All its components are built to fit perfectly with each other, while aligning to the Ant Design concepts.
-
-Save weeks of time and build your perfect dashboard with this powerful template! It features 120 fully coded components and 7 example pages if you want to get inspiration or just show something directly to your clients. This beautiful admin also comes with 5 color filter choices for both the sidebar and the cards (blue, green, red, yellow and black), an option to have a transparent or fill sidebar and an option to have a fixed navbar.
-
-## Table of Contents
-
-- [Versions](#versions)
-- [Demo](#demo)
-- [Quick Start](#quick-start)
-- [Documentation](#documentation)
-- [File Structure](#file-structure)
-- [Browser Support](#browser-support)
-- [Resources](#resources)
-- [Reporting Issues](#reporting-issues)
-- [Technical Support or Questions](#technical-support-or-questions)
-- [Licensing](#licensing)
-- [Useful Links](#useful-links)
-
-## Versions
-
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-tailwind-dashboard-react?ref=readme-madd)
-React
 
 ## Demo
 
-- [Dashboard](https://demos.creative-tim.com/muse-ant-design-dashboard/#/dashboard?ref=readme-madd)
-- [Tables](https://demos.creative-tim.com/muse-ant-design-dashboard/#/tables?ref=readme-madd)
-- [Billing](https://demos.creative-tim.com/muse-ant-design-dashboard/#/billing?ref=readme-madd)
-- [RTL](https://demos.creative-tim.com/muse-ant-design-dashboard/#/rtl?ref=readme-madd)
-- [Profile](https://demos.creative-tim.com/muse-ant-design-dashboard/#/profile?ref=readme-madd)
-- [Sign In](https://demos.creative-tim.com/muse-ant-design-dashboard/#/sign-in?ref=readme-madd)
-- [Sign Up](https://demos.creative-tim.com/muse-ant-design-dashboard/#/sign-up?ref=readme-madd)
+[Click Here](https://cryptologs.netlify.app)
 
-## Quick start
+## Featured Packages
 
-Quick start options:
+- [Ant Design](https://ant.design)
+- [Apex Charts](https://github.com/apexcharts)
+- [Coingecko Api](https://github.com/miscavage/CoinGecko-API)
+- [Comma Number](https://www.npmjs.com/package/comma-number)
+- [From Exponential](https://www.npmjs.com/package/from-exponential)
+- [HTML React Parser](https://www.npmjs.com/package/html-react-parser)
+- [Millify](https://www.npmjs.com/package/millify)
+- [React Apexcharts](https://www.npmjs.com/package/react-apexcharts)
+- [React Router Dom](https://www.npmjs.com/package/react-router-dom)
 
-- Download from [Creative Tim](https://www.creative-tim.com/product/muse-ant-design-dashboard?ref=readme-madd).
 
-## Terminal Commands
+## Available Scripts
 
-1. Download and Install NodeJs LTS version from [NodeJs Official Page](https://nodejs.org/en/download/).
-2. Navigate to the root / directory and run npm install or (yarn install, if you're using yarn) to install our local dependencies.
+In the project directory, you can run:
 
-## Documentation
+### `npm start`
 
-Muse Ant Design Dashboard build using Material Tailwind and the documentation of Material Tailwind is hosted at [website](https://demos.creative-tim.com/muse-ant-design-dashboard/#/docs/overview?ref=readme-madd).
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### What's included
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-Within the download you'll find the following directories and files:
+### `npm test`
 
-```
-Muse Ant Design Dashboard
-    ├── muse-ant-design-dashboard
-    │   ├── public
-    │   │   ├── index.html
-    │   │   ├── favicon.png
-    │   │   ├── minifest.json
-    │   │   └── robots.txt
-    │   ├── src
-    │   │   ├── assets
-    │   │   │   ├── images
-    │   │   │   └── styles
-    │   │   ├── components
-    │   │   │   ├── chart
-    │   │   │   └── layout
-    │   │   ├── pages
-    │   │   │   ├── Billing.js
-    │   │   │   ├── Home.js
-    │   │   │   ├── Profile.js
-    │   │   │   ├── Rtl.js
-    │   │   │   ├── SignIn.js
-    │   │   │   ├── SignUp.js
-    │   │   │   └── Tables.js
-    │   │   ├── App.js
-    │   │   └── index.js
-    │   ├── CHANGELOG.md
-    │   ├── LICENSE
-    │   ├── package.json
-    │   ├── README.md
-    │   ├── .env
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Browser Support
+### `npm run build`
 
-At present, we officially aim to support the last two versions of the following browsers:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Resources
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- [Live Preview](https://demos.creative-tim.com/muse-ant-design-dashboard/#/?ref=readme-madd)
-- [Download Page](https://www.creative-tim.com/product/material-tailwind-dashboard-react?ref=readme-madd)
-- Documentation is [here](https://material-tailwind.com/documentation/quick-start?ref=readme-madd)
-- [License Agreement](https://www.creative-tim.com/license?ref=readme-madd)
-- [Support](https://www.creative-tim.com/contact-us?ref=readme-madd)
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/muse-ant-design-dashboard/issues)
+### `npm run eject`
 
-## Reporting Issues
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-We use GitHub Issues as the official bug tracker for the Muse Ant Design Dashboard. Here are some advices for our users that want to report an issue:
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. Make sure that you are using the latest version of the Muse Ant Design Dashboard. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/product/muse-ant-design-dashboard?ref=readme-madd).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## Technical Support or Questions
-
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us?ref=readme-madd) instead of opening an issue.
-
-## Licensing
-
-- Copyright 2021 [Creative Tim](https://www.creative-tim.com?ref=readme-madd)
-- Creative Tim [license](https://www.creative-tim.com/license?ref=readme-madd)
-
-## Useful Links
-
-- [More products](https://www.creative-tim.com/templates?ref=readme-madd) from Creative Tim
-
-- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
-
-- [Freebies](https://www.creative-tim.com/templates/free?ref=readme-madd) from Creative Tim
-
-- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=readme-madd) (earn money)
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ##### Social Media
 
-Twitter: <https://twitter.com/CreativeTim>
+Twitter: <https://twitter.com/samsperd>
 
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Dribbble: <https://dribbble.com/creativetim>
-
-Google+: <https://plus.google.com/+CreativetimPage>
-
-Instagram: <https://instagram.com/creativetimofficial>
-# cryptologs-
+LinkedIn: <https://www.linkedin.com/in/obinna-iloeje-15183a202>
